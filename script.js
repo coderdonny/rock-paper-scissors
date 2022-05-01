@@ -1,35 +1,35 @@
 function computerPlay() {
 	let num = Math.floor(Math.random() * 3) + 1;
 	if (num === 1) {
-		return 'Rock';
+		return 'ROCK';
 	} else if (num === 2) {
-		return 'Paper';
+		return 'PAPER';
 	} else {
-		return 'Scissors';
+		return 'SCISSORS';
 	}
 }
 
 function playRound(playerSelection, computerSelection) {
-	if (playerSelection === 'Rock') {
-		if (computerSelection === 'Paper') {
+	if (playerSelection.toUpperCase() === 'ROCK') {
+		if (computerSelection === 'PAPER') {
 			return 'You lose, Paper beats Rock';
-		} else if (computerSelection === 'Scissors') {
+		} else if (computerSelection === 'SCISSORS') {
 			return 'You win, Rock beats Scissors';
 		} else {
 			return "It's a draw";
 		}
-	} else if (playerSelection === 'Paper') {
-		if (computerSelection === 'Scissors') {
+	} else if (playerSelection.toUpperCase() === 'PAPER') {
+		if (computerSelection === 'SCISSORS') {
 			return 'You lose, Scissors beats Paper';
-		} else if (computerSelection === 'Rock') {
+		} else if (computerSelection === 'ROCK') {
 			return 'You win, Paper beats Rock';
 		} else {
 			return "It's a draw";
 		}
-	} else if (playerSelection === 'Scissors') {
-		if (computerSelection === 'Rock') {
+	} else if (playerSelection.toUpperCase() === 'SCISSORS') {
+		if (computerSelection === 'ROCK') {
 			return 'You lose, Rock beats Scissors';
-		} else if (computerSelection === 'Paper') {
+		} else if (computerSelection === 'PAPER') {
 			return 'You win, Scissors beats Paper';
 		} else {
 			return "It's a draw";
@@ -37,15 +37,13 @@ function playRound(playerSelection, computerSelection) {
 	}
 }
 function game() {
-	for (let i = 0; i <= 5; i++) {
-		playRound(prompt('Choose your weapon!'), computerPlay);
+	for (let i = 0; i < 5; i++) {
+		console.log(playRound(prompt(), computerPlay()));
 	}
 }
 
-// if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
-//     return 'You win! Rock beats Scissors!';
-// } else if (playerSelection === 'Rock' && computerSelection === 'Paper') {
-//     return `You Lose! Paper beats Rock!`;
-// } else if (playerSelection === 'Rock' && computerSelection === 'Rock') {
-//     return `It's a tie!`;
-//
+game();
+
+// const playerSelection = 'rock';
+// const computerSelection = computerPlay();
+// console.log(playRound(playerSelection, computerSelection));
