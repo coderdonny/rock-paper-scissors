@@ -1,6 +1,8 @@
+//initializes the scores for the player and computer
 let playerScore = 0;
 let computerScore = 0;
 
+//generates a random number and is assigned to either rock, paper or scissors
 function computerPlay() {
 	let num = Math.floor(Math.random() * 3) + 1;
 	if (num === 1) {
@@ -12,6 +14,7 @@ function computerPlay() {
 	}
 }
 
+//once the player (and computer) makes their choice, this function determines the winner
 function playRound(playerSelection, computerSelection) {
 	if (playerSelection.toUpperCase() === 'ROCK') {
 		if (computerSelection === 'PAPER') {
@@ -45,6 +48,8 @@ function playRound(playerSelection, computerSelection) {
 		}
 	}
 }
+
+//runs the playRound() functions 5 times and determines who won
 function game() {
 	for (let i = 0; i < 5; i++) {
 		console.log(playRound(prompt(), computerPlay()));
@@ -62,8 +67,5 @@ function game() {
 	}
 }
 
+//initializes the games
 game();
-
-// const playerSelection = 'rock';
-// const computerSelection = computerPlay();
-// console.log(playRound(playerSelection, computerSelection));
