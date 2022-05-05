@@ -78,4 +78,4 @@ function game() {
 }
 
 //initializes the games
-game();
+// game();
