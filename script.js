@@ -16,40 +16,50 @@ function computerPlay() {
 
 //once the player (and computer) makes their choice, this function determines the winner
 function playRound(playerSelection, computerSelection) {
-	if (playerSelection.toUpperCase() === 'ROCK') {
-		if (computerSelection === 'PAPER') {
-			computerScore++;
-			return 'You lose, Paper beats Rock';
-		} else if (computerSelection === 'SCISSORS') {
-			playerScore++;
-			return 'You win, Rock beats Scissors';
-		} else {
-			return "It's a draw";
-		}
-	} else if (playerSelection.toUpperCase() === 'PAPER') {
-		if (computerSelection === 'SCISSORS') {
-			computerScore++;
-			return 'You lose, Scissors beats Paper';
-		} else if (computerSelection === 'ROCK') {
-			playerScore++;
-			return 'You win, Paper beats Rock';
-		} else {
-			return "It's a draw";
-		}
-	} else if (playerSelection.toUpperCase() === 'SCISSORS') {
-		if (computerSelection === 'ROCK') {
-			computerScore++;
-			return 'You lose, Rock beats Scissors';
-		} else if (computerSelection === 'PAPER') {
-			playerScore++;
-			return 'You win, Scissors beats Paper';
-		} else {
-			return "It's a draw";
+	if (
+		!(
+			playerSelection.toUpperCase() === 'ROCK' ||
+			playerSelection.toUpperCase() === 'PAPER' ||
+			playerSelection.toUpperCase() === 'SCISSORS'
+		)
+	) {
+		return 'Selection Error';
+	} else {
+		if (playerSelection.toUpperCase() === 'ROCK') {
+			if (computerSelection === 'PAPER') {
+				computerScore++;
+				return 'You lose, Paper beats Rock';
+			} else if (computerSelection === 'SCISSORS') {
+				playerScore++;
+				return 'You win, Rock beats Scissors';
+			} else {
+				return "It's a draw";
+			}
+		} else if (playerSelection.toUpperCase() === 'PAPER') {
+			if (computerSelection === 'SCISSORS') {
+				computerScore++;
+				return 'You lose, Scissors beats Paper';
+			} else if (computerSelection === 'ROCK') {
+				playerScore++;
+				return 'You win, Paper beats Rock';
+			} else {
+				return "It's a draw";
+			}
+		} else if (playerSelection.toUpperCase() === 'SCISSORS') {
+			if (computerSelection === 'ROCK') {
+				computerScore++;
+				return 'You lose, Rock beats Scissors';
+			} else if (computerSelection === 'PAPER') {
+				playerScore++;
+				return 'You win, Scissors beats Paper';
+			} else {
+				return "It's a draw";
+			}
 		}
 	}
 }
 
-//runs the playRound() functions 5 times and determines who won
+//runs the playRound() functions 5 times and determines the winner
 function game() {
 	for (let i = 0; i < 5; i++) {
 		console.log(playRound(prompt(), computerPlay()));
@@ -63,7 +73,7 @@ function game() {
 			`The score is ${playerScore} : ${computerScore}, You LOST!:(`
 		);
 	} else {
-		console.log('Congrats, you tied');
+		console.log('Congrats, you tied.');
 	}
 }
 
