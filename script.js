@@ -1,13 +1,30 @@
 //initializes the scores for the player and computer
 let playerScore = 0;
 let computerScore = 0;
-let round = 0;
+let round = 1;
 let winner;
 let gameOver = false;
 
 const rock = document.querySelector('.rock');
 const paper = document.querySelector('.paper');
 const scissors = document.querySelector('.scissors');
+
+//Stores Player and Computer PNG score images
+const scoreOne = document.querySelector('.scoreOne');
+const scoreTwo = document.querySelector('.scoreTwo');
+const scoreThree = document.querySelector('.scoreThree');
+const scoreFour = document.querySelector('.scoreFour');
+const scoreFive = document.querySelector('.scoreFive');
+
+const computerScoreOne = document.querySelector('.computerScoreOne');
+const computerScoreTwo = document.querySelector('.computerScoreTwo');
+const computerScoreThree = document.querySelector('.computerScoreThree');
+const computerScoreFour = document.querySelector('.computerScoreFour');
+const computerScoreFive = document.querySelector('.computerScoreFive');
+
+//selects modal and header message
+const modal = document.querySelector('.modal');
+const endMessage = document.createElement('h1');
 
 //generates a random number and is assigned to either rock, paper or scissors
 function computerPlay() {
@@ -23,73 +40,65 @@ function computerPlay() {
 
 //once the player (and computer) makes their choice, this function determines the winner
 function playRound(playerSelection, computerSelection) {
-	if (round === 4) {
-		gameOver = true;
-		scoreCheck();
-
-		modal_container.classList.add('show');
-		mask.classList.add('show');
-		console.log('gameOver');
-	}
-
 	if (playerSelection === 'rock') {
 		if (computerSelection === 'paper') {
 			computerScore++;
-			round++;
+			updateComputerScore(computerScore);
 			roundMessage(`Round ${round}: You lose, Paper beats Rock`);
 		} else if (computerSelection === 'scissors') {
 			playerScore++;
-			round++;
+			updatePlayerScore(playerScore);
 			roundMessage(`Round ${round}: You win, Rock beats Scissors`);
 		} else {
-			round++;
 			roundMessage(`Round ${round}: It's a draw`);
 		}
 	} else if (playerSelection === 'paper') {
 		if (computerSelection === 'scissors') {
 			computerScore++;
-			round++;
+			updateComputerScore(computerScore);
 			roundMessage(`Round ${round}: You lose, Scissors beats Paper`);
 		} else if (computerSelection === 'rock') {
 			playerScore++;
-			round++;
+			updatePlayerScore(playerScore);
 			roundMessage(`Round ${round}: You win, Paper beats Rock`);
 		} else {
-			round++;
 			roundMessage(`Round ${round}: It's a draw`);
 		}
 	} else if (playerSelection === 'scissors') {
 		if (computerSelection === 'rock') {
 			computerScore++;
-			round++;
+			updateComputerScore(computerScore);
 			roundMessage(`Round ${round}: You lose, Rock beats Scissors`);
 		} else if (computerSelection === 'paper') {
 			playerScore++;
-			round++;
+			updatePlayerScore(playerScore);
 			roundMessage(`Round ${round}: You win, Scissors beats Paper`);
 		} else {
-			round++;
-			roundMessage("It's a draw");
+			roundMessage(`Round ${round}: It's a draw`);
 		}
 	}
-	if (!gameOver) {
-		updatePlayerScore(playerScore);
-		updateComputerScore(computerScore);
+
+	if (round === 5) {
+		gameOver = true;
+		scoreCheck();
+		if (winner === 'player') {
+			modal.style.backgroundColor = 'green';
+			modal_container.classList.add('show');
+			mask.classList.add('show');
+		} else if (winner === 'computer') {
+			modal.style.backgroundColor = 'red';
+			modal_container.classList.add('show');
+			mask.classList.add('show');
+		} else if (winner === 'tied') {
+			modal.style.backgroundColor = 'yellow';
+			modal_container.classList.add('show');
+			mask.classList.add('show');
+		}
 	}
+	round++;
 }
 
-const scoreOne = document.querySelector('.scoreOne');
-const scoreTwo = document.querySelector('.scoreTwo');
-const scoreThree = document.querySelector('.scoreThree');
-const scoreFour = document.querySelector('.scoreFour');
-const scoreFive = document.querySelector('.scoreFive');
-
-const computerScoreOne = document.querySelector('.computerScoreOne');
-const computerScoreTwo = document.querySelector('.computerScoreTwo');
-const computerScoreThree = document.querySelector('.computerScoreThree');
-const computerScoreFour = document.querySelector('.computerScoreFour');
-const computerScoreFive = document.querySelector('.computerScoreFive');
-
+//updates players score with result from playRound function
 function updatePlayerScore(score) {
 	if (score === 1) {
 		scoreOne.classList.add('show');
@@ -108,6 +117,7 @@ function updatePlayerScore(score) {
 	}
 }
 
+//updates computers score with result from playRound function
 function updateComputerScore(score) {
 	if (score === 1) {
 		computerScoreOne.classList.add('show');
@@ -129,13 +139,13 @@ function updateComputerScore(score) {
 const message = document.querySelector('.outcomeMessage');
 const content = document.createElement('div');
 
+//appends a message with the results of the round
 function roundMessage(input) {
-	// content.classList.add('content');
 	content.textContent = input;
-
 	message.appendChild(content);
 }
 
+//clicking one of the below triggers a game
 rock.addEventListener('click', () => {
 	Click('rock');
 });
@@ -146,42 +156,45 @@ scissors.addEventListener('click', () => {
 	Click('scissors');
 });
 
+//takes user choice and sends it to playRound()
 function Click(playerSelection) {
-	const computerSelection = computerPlay();
-	console.log(playRound(playerSelection, computerSelection));
+	console.log(playRound(playerSelection, computerPlay()));
 }
 
+//checks the score at the end of the game and determines a winner
 function scoreCheck() {
-	if (round === 4) {
+	if (round === 5) {
 		if (playerScore > computerScore) {
+			winner = 'player';
 			endGameMessage(`WINNER! ${playerScore} : ${computerScore}`);
 		} else if (playerScore < computerScore) {
 			endGameMessage(`LOSER! ${playerScore} : ${computerScore}`);
+			winner = 'computer';
 		} else {
 			endGameMessage(`TIED GAME! ${playerScore} : ${computerScore}`);
+			winner = 'tied';
 		}
 	}
 }
 
+//resets variables to start new game
 function reset() {
-	round = 0;
+	round = 1;
 	playerScore = 0;
 	computerScore = 0;
 	content.parentNode.removeChild(content);
 	gameOver = false;
+	winner = '';
 	clearScores();
 }
 
 const open = document.querySelector('#open');
 const modal_container = document.querySelector('#modal-container');
-const close = document.querySelector('#close');
+const close = document.querySelector('.modal-container');
 
 const mask = document.querySelector('#page-mask');
 
-// open.addEventListener('click', () => {
-// 	modal_container.classList.add('show');
-// });
-
+//When closing modal at end of the game
 close.addEventListener('click', () => {
 	modal_container.classList.remove('show');
 	mask.classList.remove('show');
@@ -198,14 +211,9 @@ close.addEventListener('click', () => {
 	reset();
 });
 
-// modal_container.classList.add('show');
-
-const modal = document.querySelector('.modal');
-const endMessage = document.createElement('h1');
-
+//takes winning message and appends to modal
 function endGameMessage(input) {
 	endMessage.classList.add('content');
 	endMessage.textContent = input;
-
 	modal.appendChild(endMessage);
 }
