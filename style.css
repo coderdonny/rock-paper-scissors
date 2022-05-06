@@ -22,6 +22,7 @@ h1 {
 	color: rgb(255, 255, 255);
 	font-size: 5em;
 	margin: 0;
+	text-shadow: 0 10px 10px rgba(0, 0, 0, 0.43);
 }
 
 header {
@@ -120,11 +121,11 @@ img {
 }
 
 .modal {
-	background-color: #00b072ee;
+	background-color: #00b072f4;
 	width: 700px;
 	max-width: 100%;
 	padding: 30px;
-	border-radius: 10px;
+	border-radius: 30px;
 	box-shadow: 0 20px 20px rgba(0, 0, 0, 0.43);
 }
 
@@ -144,7 +145,7 @@ img {
 }
 
 #page-mask {
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.655);
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -157,4 +158,84 @@ img {
 #page-mask.show {
 	opacity: 1;
 	pointer-events: auto;
+}
+
+.scoreOne {
+	display: none;
+}
+
+.scoreOne.show {
+	display: block;
+}
+
+.scoreTwo {
+	display: none;
+}
+
+.scoreTwo.show {
+	display: block;
+}
+
+.scoreThree {
+	display: none;
+}
+
+.scoreThree.show {
+	display: block;
+}
+
+.scoreFour {
+	display: none;
+}
+
+.scoreFour.show {
+	display: block;
+}
+
+.scoreFive {
+	display: none;
+}
+
+.scoreFive.show {
+	display: block;
+}
+
+.computerScoreOne {
+	display: none;
+}
+
+.computerScoreOne.show {
+	display: block;
+}
+
+.computerScoreTwo {
+	display: none;
+}
+
+.computerScoreTwo.show {
+	display: block;
+}
+
+.computerScoreThree {
+	display: none;
+}
+
+.computerScoreThree.show {
+	display: block;
+}
+
+.computerScoreFour {
+	display: none;
+}
+
+.computerScoreFour.show {
+	display: block;
+}
+
+.computerScoreFive {
+	display: none;
+}
+
+.computerScoreFive.show {
+	display: block;
 }

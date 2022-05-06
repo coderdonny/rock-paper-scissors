@@ -26,10 +26,12 @@ function playRound(playerSelection, computerSelection) {
 	if (round === 4) {
 		gameOver = true;
 		scoreCheck();
+
 		modal_container.classList.add('show');
 		mask.classList.add('show');
 		console.log('gameOver');
 	}
+
 	if (playerSelection === 'rock') {
 		if (computerSelection === 'paper') {
 			computerScore++;
@@ -70,6 +72,58 @@ function playRound(playerSelection, computerSelection) {
 			roundMessage("It's a draw");
 		}
 	}
+	if (!gameOver) {
+		updatePlayerScore(playerScore);
+		updateComputerScore(computerScore);
+	}
+}
+
+const scoreOne = document.querySelector('.scoreOne');
+const scoreTwo = document.querySelector('.scoreTwo');
+const scoreThree = document.querySelector('.scoreThree');
+const scoreFour = document.querySelector('.scoreFour');
+const scoreFive = document.querySelector('.scoreFive');
+
+const computerScoreOne = document.querySelector('.computerScoreOne');
+const computerScoreTwo = document.querySelector('.computerScoreTwo');
+const computerScoreThree = document.querySelector('.computerScoreThree');
+const computerScoreFour = document.querySelector('.computerScoreFour');
+const computerScoreFive = document.querySelector('.computerScoreFive');
+
+function updatePlayerScore(score) {
+	if (score === 1) {
+		scoreOne.classList.add('show');
+	} else if (score === 2) {
+		scoreOne.classList.remove('show');
+		scoreTwo.classList.add('show');
+	} else if (score === 3) {
+		scoreTwo.classList.remove('show');
+		scoreThree.classList.add('show');
+	} else if (score === 4) {
+		scoreThree.classList.remove('show');
+		scoreFour.classList.add('show');
+	} else if (score === 5) {
+		scoreFour.classList.remove('show');
+		scoreFive.classList.add('show');
+	}
+}
+
+function updateComputerScore(score) {
+	if (score === 1) {
+		computerScoreOne.classList.add('show');
+	} else if (score === 2) {
+		computerScoreOne.classList.remove('show');
+		computerScoreTwo.classList.add('show');
+	} else if (score === 3) {
+		computerScoreTwo.classList.remove('show');
+		computerScoreThree.classList.add('show');
+	} else if (score === 4) {
+		computerScoreThree.classList.remove('show');
+		computerScoreFour.classList.add('show');
+	} else if (score === 5) {
+		computerScoreFour.classList.remove('show');
+		computerScoreFive.classList.add('show');
+	}
 }
 
 const message = document.querySelector('.outcomeMessage');
@@ -97,17 +151,6 @@ function Click(playerSelection) {
 	console.log(playRound(playerSelection, computerSelection));
 }
 
-// if (gameOver = true){
-// 		if (input === 'player') {
-// 			winningMessage(`WINNER! ${playerScore} : ${computerScore}`)
-// 		} else if ((input = 'computer')) {
-// 			winningMessage(`WINNER! ${playerScore} : ${computerScore}`)
-// 		} else {
-// 			winningMessage(`WINNER! ${playerScore} : ${computerScore}`)
-// 		}
-// 	}
-// }
-
 function scoreCheck() {
 	if (round === 4) {
 		if (playerScore > computerScore) {
@@ -124,7 +167,9 @@ function reset() {
 	round = 0;
 	playerScore = 0;
 	computerScore = 0;
-	content.parentNode.removeChild(div);
+	content.parentNode.removeChild(content);
+	gameOver = false;
+	clearScores();
 }
 
 const open = document.querySelector('#open');
@@ -140,6 +185,16 @@ const mask = document.querySelector('#page-mask');
 close.addEventListener('click', () => {
 	modal_container.classList.remove('show');
 	mask.classList.remove('show');
+	scoreOne.classList.remove('show');
+	scoreTwo.classList.remove('show');
+	scoreThree.classList.remove('show');
+	scoreFour.classList.remove('show');
+	scoreFive.classList.remove('show');
+	computerScoreOne.classList.remove('show');
+	computerScoreTwo.classList.remove('show');
+	computerScoreThree.classList.remove('show');
+	computerScoreFour.classList.remove('show');
+	computerScoreFive.classList.remove('show');
 	reset();
 });
 
