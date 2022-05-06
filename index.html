@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Patrick+Hand&display=swap"
+        rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Caveat&family=Pacifico&family=Shadows+Into+Light&family=Square+Peg&display=swap"
         rel="stylesheet">
@@ -25,8 +32,31 @@
         <a><img class="scissors" src="./images/Scissors.png" alt=""></a>
     </div>
 
+
     <div class="scores">
-        <img src="./images/scoreFive.png" alt="">
+        <div class="playerScore">
+            <img id='playerOne' src="./images/scoreOne.png" alt="score: 1">
+            <h3>player</h3>
+        </div>
+        <div class="outcomeMessage">
+            <div></div>
+
+        </div>
+        <div class="computerScore">
+            <img src="./images/computerScoreFive.png" alt="" srcset="">
+            <h3>computer</h3>
+        </div>
+    </div>
+
+    <div id="page-mask"></div>
+
+    <div class="modal-container" id="modal-container">
+        <div class="modal">
+            <h1></h1>
+            <p></p>
+            <button id="close">Play Again!</button>
+        </div>
+
     </div>
 
     <script src="script.js"></script>

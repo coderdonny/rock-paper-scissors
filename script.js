@@ -1,7 +1,9 @@
 //initializes the scores for the player and computer
 let playerScore = 0;
 let computerScore = 0;
-let round = 1;
+let round = 0;
+let winner;
+let gameOver = false;
 
 const rock = document.querySelector('.rock');
 const paper = document.querySelector('.paper');
@@ -21,46 +23,63 @@ function computerPlay() {
 
 //once the player (and computer) makes their choice, this function determines the winner
 function playRound(playerSelection, computerSelection) {
+	if (round === 4) {
+		gameOver = true;
+		scoreCheck();
+		modal_container.classList.add('show');
+		mask.classList.add('show');
+		console.log('gameOver');
+	}
 	if (playerSelection === 'rock') {
 		if (computerSelection === 'paper') {
 			computerScore++;
 			round++;
-			return 'You lose, Paper beats Rock';
+			roundMessage(`Round ${round}: You lose, Paper beats Rock`);
 		} else if (computerSelection === 'scissors') {
 			playerScore++;
 			round++;
-			return 'You win, Rock beats Scissors';
+			roundMessage(`Round ${round}: You win, Rock beats Scissors`);
 		} else {
 			round++;
-			return "It's a draw";
+			roundMessage(`Round ${round}: It's a draw`);
 		}
 	} else if (playerSelection === 'paper') {
 		if (computerSelection === 'scissors') {
 			computerScore++;
 			round++;
-			return 'You lose, Scissors beats Paper';
+			roundMessage(`Round ${round}: You lose, Scissors beats Paper`);
 		} else if (computerSelection === 'rock') {
 			playerScore++;
 			round++;
-			return 'You win, Paper beats Rock';
+			roundMessage(`Round ${round}: You win, Paper beats Rock`);
 		} else {
 			round++;
-			return "It's a draw";
+			roundMessage(`Round ${round}: It's a draw`);
 		}
 	} else if (playerSelection === 'scissors') {
 		if (computerSelection === 'rock') {
 			computerScore++;
 			round++;
-			return 'You lose, Rock beats Scissors';
+			roundMessage(`Round ${round}: You lose, Rock beats Scissors`);
 		} else if (computerSelection === 'paper') {
 			playerScore++;
 			round++;
-			return 'You win, Scissors beats Paper';
+			roundMessage(`Round ${round}: You win, Scissors beats Paper`);
 		} else {
 			round++;
-			return "It's a draw";
+			roundMessage("It's a draw");
 		}
 	}
+}
+
+const message = document.querySelector('.outcomeMessage');
+const content = document.createElement('div');
+
+function roundMessage(input) {
+	// content.classList.add('content');
+	content.textContent = input;
+
+	message.appendChild(content);
 }
 
 rock.addEventListener('click', () => {
@@ -76,24 +95,62 @@ scissors.addEventListener('click', () => {
 function Click(playerSelection) {
 	const computerSelection = computerPlay();
 	console.log(playRound(playerSelection, computerSelection));
-	winner();
 }
 
-function winner() {
-	if (round === 6)
+// if (gameOver = true){
+// 		if (input === 'player') {
+// 			winningMessage(`WINNER! ${playerScore} : ${computerScore}`)
+// 		} else if ((input = 'computer')) {
+// 			winningMessage(`WINNER! ${playerScore} : ${computerScore}`)
+// 		} else {
+// 			winningMessage(`WINNER! ${playerScore} : ${computerScore}`)
+// 		}
+// 	}
+// }
+
+function scoreCheck() {
+	if (round === 4) {
 		if (playerScore > computerScore) {
-			alert('Winner');
-			reset();
+			endGameMessage(`WINNER! ${playerScore} : ${computerScore}`);
 		} else if (playerScore < computerScore) {
-			alert('Loser');
-			reset();
+			endGameMessage(`LOSER! ${playerScore} : ${computerScore}`);
 		} else {
-			alert('tied');
+			endGameMessage(`TIED GAME! ${playerScore} : ${computerScore}`);
 		}
+	}
 }
 
 function reset() {
 	round = 0;
 	playerScore = 0;
 	computerScore = 0;
+	content.parentNode.removeChild(div);
+}
+
+const open = document.querySelector('#open');
+const modal_container = document.querySelector('#modal-container');
+const close = document.querySelector('#close');
+
+const mask = document.querySelector('#page-mask');
+
+// open.addEventListener('click', () => {
+// 	modal_container.classList.add('show');
+// });
+
+close.addEventListener('click', () => {
+	modal_container.classList.remove('show');
+	mask.classList.remove('show');
+	reset();
+});
+
+// modal_container.classList.add('show');
+
+const modal = document.querySelector('.modal');
+const endMessage = document.createElement('h1');
+
+function endGameMessage(input) {
+	endMessage.classList.add('content');
+	endMessage.textContent = input;
+
+	modal.appendChild(endMessage);
 }
