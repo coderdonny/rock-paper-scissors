@@ -25,6 +25,7 @@ h1 {
 	justify-content: center;
 	/* background-color: rgb(255, 250, 118); */
 	padding: 15px 0px;
+	flex-wrap: wrap;
 }
 
 .scores {
