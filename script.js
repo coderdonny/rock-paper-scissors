@@ -10,12 +10,14 @@ const paper = document.querySelector('.paper');
 const scissors = document.querySelector('.scissors');
 
 //Stores Player and Computer PNG score images
+const scoreZero = document.querySelector('.scoreZero');
 const scoreOne = document.querySelector('.scoreOne');
 const scoreTwo = document.querySelector('.scoreTwo');
 const scoreThree = document.querySelector('.scoreThree');
 const scoreFour = document.querySelector('.scoreFour');
 const scoreFive = document.querySelector('.scoreFive');
 
+const computerScoreZero = document.querySelector('.computerScoreZero');
 const computerScoreOne = document.querySelector('.computerScoreOne');
 const computerScoreTwo = document.querySelector('.computerScoreTwo');
 const computerScoreThree = document.querySelector('.computerScoreThree');
@@ -98,9 +100,20 @@ function playRound(playerSelection, computerSelection) {
 	round++;
 }
 
+if (playerScore === 0) {
+	scoreZero.classList.add('show');
+}
+
+if (computerScore === 0) {
+	computerScoreZero.classList.add('show');
+}
+
 //updates players score with result from playRound function
 function updatePlayerScore(score) {
-	if (score === 1) {
+	if (score === 0) {
+		scoreZero.classList.add('show');
+	} else if (score === 1) {
+		scoreZero.classList.remove('show');
 		scoreOne.classList.add('show');
 	} else if (score === 2) {
 		scoreOne.classList.remove('show');
@@ -119,7 +132,10 @@ function updatePlayerScore(score) {
 
 //updates computers score with result from playRound function
 function updateComputerScore(score) {
-	if (score === 1) {
+	if (score === 0) {
+		computerScoreZero.classList.add('show');
+	} else if (score === 1) {
+		computerScoreZero.classList.remove('show');
 		computerScoreOne.classList.add('show');
 	} else if (score === 2) {
 		computerScoreOne.classList.remove('show');
@@ -198,16 +214,20 @@ const mask = document.querySelector('#page-mask');
 close.addEventListener('click', () => {
 	modal_container.classList.remove('show');
 	mask.classList.remove('show');
+
 	scoreOne.classList.remove('show');
 	scoreTwo.classList.remove('show');
 	scoreThree.classList.remove('show');
 	scoreFour.classList.remove('show');
 	scoreFive.classList.remove('show');
+
 	computerScoreOne.classList.remove('show');
 	computerScoreTwo.classList.remove('show');
 	computerScoreThree.classList.remove('show');
 	computerScoreFour.classList.remove('show');
 	computerScoreFive.classList.remove('show');
+	scoreZero.classList.add('show');
+	computerScoreZero.classList.add('show');
 	reset();
 });
 
